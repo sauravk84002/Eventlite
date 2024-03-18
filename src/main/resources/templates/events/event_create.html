@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+
+<head>
+
+
+  <title>All events</title>
+</head>
+<tbody>
+	<div layout:fragment="content">
+  <br>
+   	<h1>Create event</h1>
+   	<br>
+			<form action="#" th:action="@{/events/event_create}"  sec:authorize="isAuthenticated()" modelAttribute="event" method="post">
+			<div class="input-group mb-3">
+			  <div class="input-group-prepend">
+			    <span class="input-group-text" id="basic-addon1">Event name</span>
+			  </div>
+			  <input type="text" id="name" name="name"   th:maxlength="256" th:required="required" class="form-control"  aria-label="Username" aria-describedby="basic-addon1">
+			</div>		
+			<div class="input-group mb-3">
+			  <div class="input-group-prepend">
+			    <span class="input-group-text" id="basic-addon1">Time</span>
+			  </div>
+				<label for="time"></label>
+				<input type="time" class="form_control" id="time" name="time" aria-label="Username" aria-describedby="basic-addon1"><br><br>
+			</div>
+		    <div class="input-group mb-3">
+			  <div class="input-group-prepend">
+			    <span class="input-group-text" id="basic-addon1">Time</span>
+			  </div>
+				<label for="date"></label>
+				<input type="date" id="date" name="date" aria-label="Username" aria-describedby="basic-addon1" min="<?php echo $today; ?>"><br><br>
+			</div>	
+			<div class="input-group mb-3">
+			  <div class="input-group-prepend">
+			    <span class="input-group-text" id="basic-addon1">Description</span>
+			  </div>
+			  <input type="text" id="description" name="description"   th:maxlength="256" th:required="required" class="form-control"  aria-label="Username" aria-describedby="basic-addon1">
+			</div>
+			<div class="input-group mb-3">
+			  <div class="input-group-prepend">
+			    <span class="input-group-text" id="basic-addon1">Venue</span>
+			  </div>
+			  <select  class="form-control" th:id="venue" th:name="venue"  type="hidden" placeholder="1" aria-label="Username" aria-describedby="basic-addon1">
+	        	<option th:each="venue : ${venues}"
+	        		th:value="${venue.getId()}"
+	                th:text="${venue.getName()}"/>
+	    		</select>
+			</div>
+    		  <script>
+    		    var today = new Date();
+				var dd = today.getDate();
+				var mm = today.getMonth() + 1; //January is 0!
+				var yyyy = today.getFullYear();
+				
+				if (dd < 10) {
+				   dd = '0' + dd;
+				}
+				
+				if (mm < 10) {
+				   mm = '0' + mm;
+				} 
+				    
+				today = yyyy + '-' + mm + '-' + dd;
+				document.getElementById("date").setAttribute("min", today);
+				</script>
+			  <input type="submit" class="btn btn-success btn-lg" value="Add">
+			</form>
+				   <form th:action="@{/events}">
+	      <button type="submit" class="btn btn-succes btn-lg">
+	      	<span class="fas fa-reply"></span>
+	      	Back
+	      </button>
+	    </form>
+	 </div>	
+</tbody>
+</html>

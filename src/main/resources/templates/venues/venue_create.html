@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+
+<head>
+
+
+  <title>All venues</title>
+</head>
+
+<tbody>
+	<div layout:fragment="content">
+		<th1>fill out creating the form</th1>
+			<form action="#" th:action="@{/venues/venue_create}" th:object="${venue}"  sec:authorize="isAuthenticated()" modelAttribute="venue" method="post">
+			<div class="input-group mb-3">
+			  <div class="input-group-prepend">
+			    <span class="input-group-text" id="basic-addon1">Venue name</span>
+			  </div>
+			  <input type="text" id="name" name="name"   th:maxlength="256" th:required="required" class="form-control"  aria-label="Username" aria-describedby="basic-addon1">
+			</div>
+			<div class="input-group mb-3">
+			  <div class="input-group-prepend">
+			    <span class="input-group-text" id="basic-addon1">Road name</span>
+			  </div>
+			  <input type="text" id="address" name="address"  th:maxlength="300" th:required="required" class="form-control"  aria-label="Username" aria-describedby="basic-addon1">
+			</div>
+			<div class="input-group mb-3">
+			  <div class="input-group-prepend">
+			    <span class="input-group-text" id="basic-addon1">Postalcode</span>
+			  </div>
+			  <input type="text" id="postalCode" name="postalCode"  pattern="^([A-Z][A-HJ-Y]?\d[A-Z\d]? ?\d[A-Z]{2}|GIR ?0A{2})$" th:required="required" class="form-control"  aria-label="Username" aria-describedby="basic-addon1">
+			</div>
+			<div class="input-group mb-3">
+			  <div class="input-group-prepend">
+			    <span class="input-group-text" id="basic-addon1">Capacity</span>
+			  </div>
+			  <input type="number" id="capacity" name="capacity"  min = "1" th:required="required" class="form-control"  aria-label="Username" aria-describedby="basic-addon1">
+			</div>
+				
+	  
+			  <input type="submit" class="btn btn-success btn-lg" value="Submit">
+			</form>
+			<form th:action="@{/venues}">
+	      <button type="submit" class="btn btn-succes btn-lg">
+	      	<span class="fas fa-reply"></span>
+	      	Back
+	      </button>
+	    </form>
+	 </div>	
+</tbody>
+</html>

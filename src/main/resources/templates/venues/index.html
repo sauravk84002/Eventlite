@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/default}">
+<head>
+  <title>All Venues</title>
+</head>
+<body>
+  <div layout:fragment="content">
+  <br>
+    <h1>All Venues</h1>
+    <br>
+        <form th:action="@{/homepage}">
+      <button type="submit" class="btn btn-succes btn-lg">
+	  	<span class="fas fa-reply"></span>
+	  	Back to homepage
+	  </button>
+	</form>
+    <form style="display: inline" th:action="@{/venues/venues}" method="get">
+	  <input type="text" name="keyword" th:value="${keyword}"  placeholder="Search by venue name" class="w-75 p-2">
+	  <button type="submit" class="btn btn-primary btn-lg" >
+	  <span class="fas fa-search" aria-hidden="true"></span>
+	  Search</button>
+	</form>
+	<form style="display: inline" th:action="@{/venues}">
+      <button type="submit" class="btn btn-secondary btn-lg">
+	  	<span class="far fa-check-circle" aria-hidden="true"></span>
+	  	Finish
+	  </button>
+	</form>
+	<br>
+    <br>
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th><i class="fas fa-bolt"></i> Id</th>
+          <th><i class="fas fa-bolt"></i> Venue</th>
+          <th><i class="fas fa-map-marker-alt"></i> Address</th>
+          <th><i class="fas fa-map-marker-alt"></i> Postal Code</th>
+          <th><i></i> Capacity</th>
+          
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="v : ${venues}">
+          <td th:text="${v.id}">Venue id</td>
+          <td><a th:href="'/venues/' + ${v.id}" th:text="${v.name}">Venue Name</a></td>
+          <td th:text="${v.address}">Venue Address</td>
+          <td th:text="${v.postalCode}">Venue postalCode</td>
+          <td th:text="${v.capacity}">Venue Capacity</td>
+        </tr>
+      </tbody>
+    </table>
+    <br>
+	<form th:action="@{venues/venue_create}">
+      <button type="submit" class="btn btn-success btn-lg">
+      	<span class="fas fa-plus" aria-hidden="true"></span>
+      	Add
+      </button>
+    </form>
+    <br>
+    <form th:action="@{venues/venue_update}">
+      <button type="submit" class="btn btn-warning btn-lg">
+      	<span class="fas fa-pencil-alt" aria-hidden="true"></span>
+      	Update
+      </button>
+    </form>
+    <br>
+  </div>
+  
+
+
+
+
+
+</body>
+</html>
